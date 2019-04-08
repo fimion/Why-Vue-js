@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Demos</title>
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="00-index.html">Back to List of Demos</a>
+    </nav>
+    <div id="app">
+      <label>
+        Height:
+        <!-- <input
+          type="number"
+          v-bind:value="height"
+          v-on:input="height=$event.target.value"
+        /> -->
+        <input type="number"
+                 v-bind:value="height"
+                 v-on:input="handleHeightInput">
+      </label>
+      <label>
+        Width:
+        <input type="number" v-model="width" />
+      </label>
+      <div>
+        <img
+          v-bind:src="image"
+          v-bind:style="{
+        height:height+'px',
+        width:width+'px',
+       }"
+          alt="Vue Logo"
+        />
+      </div>
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data() {
+          return {
+            image: "img/vue-logo.png",
+            height: 100,
+            width: 100
+          };
+        },
+        methods: {
+          handleHeightInput(e) {
+            this.height = e.target.value;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

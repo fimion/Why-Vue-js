@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue Demos</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<nav>
+  <a href="00-index.html">Back to List of Demos</a>
+</nav>
+<div id="app">
+  <label>
+    <input type="checkbox" 
+           v-model="showSettings"> 
+    Show Settings
+  </label>
+  <div v-if="showSettings">
+    <h1>settings</h1>
+    <ul>
+      <li v-for="(item, key) in settings" 
+          :key="'SETTINGS'+key">
+        <label>
+          {{ key }}: 
+          <input type="text" 
+                 v-model="settings[key]">
+        </label>
+      </li>
+    </ul>
+  </div>
+  <div v-else>
+    <h1>{{ settings.toDoListName }}</h1>
+    <ul>
+      <li v-for="item in unfinishedToDoItems" 
+          :key="'TODO'+item.id">
+        <h3>
+          <label>
+            <input type="checkbox"
+                   @input="completeTodoItem(item.id)"
+                   :checked="item.complete"> 
+            {{ settings.itemName }} - {{ item.title }}
+            </label>
+          </h3>
+        <p>{{ item.description }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+<script>
+  var app = new Vue({
+    el:"#app",
+    data(){
+      return {
+        // Do we want to see our settings?
+        showSettings:false,
+
+        // The actual Settings
+        settings:{
+          toDoListName:"Alex's To-Do List",
+          itemName:"To-Do",
+        },
+
+        // Our Illustrious To Do List
+        toDoList:[
+          {
+            id:1,
+            title:"Mow Lawn",
+            description: "It's kinda shabby looking.",
+            complete:false,
+          },
+          {
+            id:2,
+            title:"Take out the trash",
+            description: "Seriously. What is that smell?",
+            complete:false,
+          },
+          {
+            id:3,
+            title:"Take a nap.",
+            description: "You seem tired.",
+            complete:false,
+          },
+        ],
+      }
+    },
+    methods:{
+      completeTodoItem(id){
+        this.toDoList.forEach((el, i) => {
+          if(el.id === id){
+            this.toDoList[i].complete = true;
+          }
+        });
+      }
+    },
+    computed:{
+      unfinishedToDoItems(){
+        return this.toDoList.filter(e=>!e.complete)
+      }
+    }
+  });
+</script>
+</body>
+</html>
