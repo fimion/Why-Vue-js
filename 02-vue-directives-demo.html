@@ -5,45 +5,48 @@
     <title>Vue Demos</title>
     <script src="vue.js"></script>
   </head>
+  <style>
+  img{
+    transition: height 0.5s ease, width 0.5s ease;
+  }
+  </style>
   <body>
-    <nav>
+    <nav class="navbar">
       <a href="index.html">Back to List of Demos</a>
     </nav>
-    <div id="app">
+
+    <main id="app">
       <label>
         Height:
-         <input
-          type="number"
-          v-bind:value="height"
-          v-on:input="height=$event.target.value"
-        />
-        <!--<input type="number"
+          <input type="number"
                  v-bind:value="height"
-                 v-on:input="handleHeightInput">-->
+                 v-on:input="height=$event.target.value" />
+        <!--<input type="number"
+                  v-bind:value="height"
+                  v-on:input="handleHeightInput" />-->
       </label>
       <label>
         Width:
-        <input type="number" v-model="width" />
+        <input type="number" 
+               v-model="width" />
       </label>
-      <div>
-        <img
-          v-bind:src="image"
-          v-bind:style="{
-        height:height+'px',
-        width:width+'px',
-       }"
-          alt="Vue Logo"
-        />
+      <div style="margin:20px;">
+        <img  v-bind:src="image"
+              v-bind:style="{
+                height:height+'px',
+                width:width+'px',
+                }"
+              alt="Vue Logo"/>
       </div>
-    </div>
+    </main>
     <script>
       var app = new Vue({
         el: "#app",
         data() {
           return {
-            image: "img/vue-logo.png",
-            height: 100,
-            width: 100
+            image: "img/vue-logo.svg",
+            height: 227,
+            width: 262,
           };
         },
         /*methods: {
