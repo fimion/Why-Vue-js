@@ -23,35 +23,6 @@
     <p>{{ item.description }}</p>
   </div>
 </template>
-
-
-<!-- This is our main Vue Instance -->
-<div id="app">
-  <label>
-    <input type="checkbox" 
-           v-model="showComplete"> 
-    Show Complete
-  </label>
-  <div >
-    <h1>Alex's To-Do List</h1>
-    <ul v-if="showComplete">
-      <li v-for="item in finishedToDoItems" 
-        :key="'TODO'+item.id">
-        <to-do-item :item="item"
-                      @update-item="updateItem"></to-do-item>
-      </li>
-    </ul>
-    <ul v-else>
-        <li v-for="item in unfinishedToDoItems" 
-        :key="'TODO'+item.id">
-          <to-do-item :item="item"
-                      @update-item="updateItem"></to-do-item>
-        </li>
-    </ul>
-  </div>
-</div>
-
-
 <script>
   var ToDoItem = {
     template:"#to-do-item",
@@ -64,7 +35,35 @@
       }
     }
   }
+</script>
 
+
+<!-- This is our main Vue Instance -->
+<div id="app">
+  <label>
+    <input type="checkbox"
+           v-model="showComplete">
+    Show Complete
+  </label>
+  <div >
+    <h1>Alex's To-Do List</h1>
+    <ul v-if="showComplete">
+      <li v-for="item in finishedToDoItems"
+        :key="'TODO'+item.id">
+        <to-do-item :item="item"
+                      @update-item="updateItem"></to-do-item>
+      </li>
+    </ul>
+    <ul v-else>
+        <li v-for="item in unfinishedToDoItems"
+        :key="'TODO'+item.id">
+          <to-do-item :item="item"
+                      @update-item="updateItem"></to-do-item>
+        </li>
+    </ul>
+  </div>
+</div>
+<script>
   var app = new Vue({
     el:"#app",
     components:{

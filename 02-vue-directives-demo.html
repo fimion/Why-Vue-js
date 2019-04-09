@@ -12,14 +12,14 @@
     <div id="app">
       <label>
         Height:
-        <!-- <input
+         <input
           type="number"
           v-bind:value="height"
           v-on:input="height=$event.target.value"
-        /> -->
-        <input type="number"
+        />
+        <!--<input type="number"
                  v-bind:value="height"
-                 v-on:input="handleHeightInput">
+                 v-on:input="handleHeightInput">-->
       </label>
       <label>
         Width:
@@ -46,11 +46,11 @@
             width: 100
           };
         },
-        methods: {
+        /*methods: {
           handleHeightInput(e) {
             this.height = e.target.value;
           }
-        }
+        }*/
       });
     </script>
   </body>

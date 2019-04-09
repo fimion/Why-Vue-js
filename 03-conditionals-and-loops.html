@@ -10,93 +10,78 @@
   <a href="00-index.html">Back to List of Demos</a>
 </nav>
 <div id="app">
-  <label>
-    <input type="checkbox" 
-           v-model="showSettings"> 
-    Show Settings
-  </label>
-  <div v-if="showSettings">
-    <h1>settings</h1>
+  <div>
+    <label>
+      Number of things:
+      <input type="number"
+             v-model="countThings">
+    </label>
+    <h5 v-if="countThings <= 0">
+      We have nothing.
+    </h5>
+    <h4 v-else-if="countThings < 2">
+      We have a single thing.
+    </h4>
+    <h3 v-else-if="countThings < 3">
+      We have a couple of things.
+    </h3>
+    <h2 v-else-if="countThings <10">
+      We have a few things.
+    </h2>
+    <h1 v-else>
+      WE HAVE MANY THINGS!!
+    </h1>
+  </div>
+
+  <!--<div>
+    <h1>A Simple Todo List</h1>
+    <label>
+      Add Todo Item:
+      <input type="text" v-model="newToDo">
+    </label>
+    <button v-on:click="addToDoItem">
+      Add
+    </button>
     <ul>
-      <li v-for="(item, key) in settings" 
-          :key="'SETTINGS'+key">
-        <label>
-          {{ key }}: 
-          <input type="text" 
-                 v-model="settings[key]">
-        </label>
+      <li v-for="item in toDoList"
+          :key="'TODO'+item">
+&lt;!&ndash;        <button @click="removeToDoItem(index)">Done</button>&ndash;&gt;
+        {{item}}
       </li>
     </ul>
-  </div>
-  <div v-else>
-    <h1>{{ settings.toDoListName }}</h1>
-    <ul>
-      <li v-for="item in unfinishedToDoItems" 
-          :key="'TODO'+item.id">
-        <h3>
-          <label>
-            <input type="checkbox"
-                   @input="completeTodoItem(item.id)"
-                   :checked="item.complete"> 
-            {{ settings.itemName }} - {{ item.title }}
-            </label>
-          </h3>
-        <p>{{ item.description }}</p>
-      </li>
-    </ul>
-  </div>
+  </div>-->
 </div>
 <script>
   var app = new Vue({
     el:"#app",
     data(){
       return {
-        // Do we want to see our settings?
-        showSettings:false,
+        countThings:0,
 
-        // The actual Settings
-        settings:{
-          toDoListName:"Alex's To-Do List",
-          itemName:"To-Do",
-        },
+        newToDo:"",
 
         // Our Illustrious To Do List
         toDoList:[
-          {
-            id:1,
-            title:"Mow Lawn",
-            description: "It's kinda shabby looking.",
-            complete:false,
-          },
-          {
-            id:2,
-            title:"Take out the trash",
-            description: "Seriously. What is that smell?",
-            complete:false,
-          },
-          {
-            id:3,
-            title:"Take a nap.",
-            description: "You seem tired.",
-            complete:false,
-          },
+          "Mow Lawn",
+          "Take out the trash",
+          "Take a nap.",
         ],
       }
     },
     methods:{
-      completeTodoItem(id){
-        this.toDoList.forEach((el, i) => {
-          if(el.id === id){
-            this.toDoList[i].complete = true;
-          }
-        });
-      }
+      addToDoItem(e){
+        this.toDoList.push(this.newToDo)
+        this.newToDo = ""
+      },
+      // removeToDoItem(index){
+      //   this.toDoList.splice(index, 1)
+      // }
     },
-    computed:{
-      unfinishedToDoItems(){
-        return this.toDoList.filter(e=>!e.complete)
-      }
-    }
+    // computed:{
+    //   numberOfToDoItems(){
+    //     return this.toDoList.length
+    //   }
+    // }
   });
 </script>
 </body>
